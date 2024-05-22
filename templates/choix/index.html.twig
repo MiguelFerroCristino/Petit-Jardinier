@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChoixController!{% endblock %}
+
+{% block body %}
+{% if app.user %}
+<div class="example-wrapper">
+  <div class="h-[101vh] w-[101vw] flex justify-center items-center">
+    <div
+      class="flex flex-col text-center gap-4 border-2 rounded border-neutral-600 w-96 p-2"
+    >
+      <h1 class="text-3xl">Vous êtes ?</h1>
+     
+      <form method="post" action="{{ path('mesure') }}"  class="flex flex-col rouge gap-2">
+        <div>
+          <input
+            type="radio"
+            name="choix"
+            value="Particulier"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            required
+          />
+          <label for="Particulier">Particulier</label>
+        </div>
+        <div>
+          <input
+            name="choix"
+            type="radio"
+            value="Entreprise"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            required
+          />
+          <label for="Entreprise">Entreprise</label>
+        </div>
+        <input
+          class="bg-neutral-800 hover:bg-neutral-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+          type="submit"
+        />
+      </form>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="example-wrapper">
+    <div class="h-[101vh] w-[101vw] flex justify-center items-center">
+      <div
+        class="flex flex-col text-center gap-4 border-2 rounded border-neutral-600 w-96 p-2"
+      >
+        <h1 class="text-3xl">Vous êtes ?</h1>
+       
+        <form method="post" action="{{ path('mesure') }}"  class="flex flex-col rouge gap-2">
+          <div>
+            <input
+              type="radio"
+              name="choix"
+              value="Particulier"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              required
+            />
+            <label for="Particulier">Particulier</label>
+          </div>
+          <div>
+            <input
+              name="choix"
+              type="radio"
+              value="Entreprise"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              required
+            />
+            <label for="Entreprise">Entreprise</label>
+          </div>
+          <input
+            class="bg-neutral-800 hover:bg-neutral-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+            type="submit"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

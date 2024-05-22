@@ -1,0 +1,38 @@
+{# templates/devis/list.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Devis{% endblock %}
+
+{% block body %}
+<style>
+</style>
+
+<div class="example-wrapper">
+    <h1 class="text-2xl font-bold mb-4">Liste des Devis</h1>
+    <table class="table-auto w-full">
+        <thead>
+            <tr>
+                <th>Numéro</th>
+                <th>Date</th>
+                <th>Prix Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for devis in devis %}
+                <tr>
+                    <td>{{ devis.id }}</td>
+                    <td>{{ devis.date|date('Y-m-d') }}</td>
+                    <td>{{ devis.prixTotal }}</td>
+                    <td>
+                        <a href="{{ path('app_devis_detail', {id: devis.id}) }}" class="text-blue-500">Voir</a>
+                        {% if app.user and app.user.hasAdminRole() %}
+                            | <a href="{{ path('app_devis_delete', {id: devis.id}) }}" class="text-red-500">Supprimer</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

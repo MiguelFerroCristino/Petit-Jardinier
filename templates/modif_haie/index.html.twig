@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une Haie{% endblock %}
+
+{% block body %}
+<div class="flex">
+    <h1 class="text-2xl">Modifier une Haie</h1>
+
+    <form action="{{ path('modifier', { 'code': haie.getCode() }) }}" method="post">
+        <label for="haie_nom">Nom:</label>
+        <input type="text" id="haie_nom" name="haie_nom" value="{{ haie.getNom() }}"><br><br>
+        
+        <label for="haie_prix">Prix:</label>
+        <input type="text" id="haie_prix" name="haie_prix" value="{{ haie.getPrix() }}"><br><br>
+        
+        <label for="select-haie">Catégorie:</label>
+        <input type="text" id="select-haie" name="select-haie" value="{{ haie.getCategorie() }}"><br><br>
+        
+        <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" name="valider" value="Valider">
+    </form>
+</div>
+{% endblock %}

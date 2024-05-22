@@ -1,19 +1,111 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <style>
+            body{
+                background-color: lightgrey;
+            }
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+            nav ul {
+                background-color: #2E8B57;
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+            }
+
+            nav ul li {
+                position: relative;
+                padding: 10px;
+            }
+
+            nav ul li a {
+                text-decoration: none;
+                color: inherit;
+                transition: color 0.3s ease; 
+            }
+
+            nav ul ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #2E8B57;
+                border: 1px solid #ccc;
+                border-radius: 20px;
+                opacity: 0;
+                transition: opacity 0.3s ease, height 0.3s ease; /* Ajout de la transition pour l'opacité et la hauteur */
+            }
+
+            nav ul ul li {
+                width: 100%;
+                white-space: nowrap;
+            }
+
+            nav ul ul li a {
+                padding: 10px;
+                display: block;
+                transition: color 0.3s ease; 
+            }
+
+            nav ul li:hover > ul {
+                display: block;
+                opacity: 1; 
+                height: auto; 
+            }
+        </style>
+    {% endblock %}
+</head>
+<body>
+    <nav class="text-white">
+        <ul>
+            <li><a class="text-5xl">Le Petit Jardinier</a></li>
+        </ul>
+        <ul>
+            {% if app.user %}
+                <a href="{{path('app_logout')}}" class="block px-4 py-2 hover:bg-green-600 rounded-xl text-white">Se déconnecter</a>
+                <li><a href="{{ path('app_devis_list') }}">Listes Devis</a></li>
+                <li><a href="{{ path('app_voir_haie') }}">Consultation / Modification</a></li>
+                {% else %}
+                <div class="flex gap-6">
+                <a href="{{path('app_login')}}" class="block px-4 py-2 hover:bg-green-600 rounded-xl text-white">Se connecter</a>
+                <a href="{{path('app_register')}}" class="block px-4 py-2 hover:bg-green-600 rounded-xl text-white">S'inscrire</a>
+            </div>
+ 
+                {% endif %}
+            <li><a href="{{ path('accueil') }}">Accueil</a></li>
+            {% if app.user %}
+            <li>
+                <a href="#">Devis</a>
+                <ul>
+                    <li><a href="{{ path('app_choix') }}">Demande de devis</a></li>
+                </ul>
+            </li>
+            {% endif %}
+            {% if app.user and app.user.hasAdminRole() %}
+            <li>
+                <a href="#">Gestion des types de haies</a>
+                <ul>
+                    <li><a href="{{ path('app_creation_haie') }}">Création</a></li>
+                </ul>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+
+    {% block body %}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</body>
 </html>

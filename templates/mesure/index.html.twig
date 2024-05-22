@@ -1,0 +1,23 @@
+{# templates/devis/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un Devis{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>Créer un Devis</h1>
+
+    <form method="get" action="{{ path('app_devis_create') }}">
+        <div class="form-group">
+            <label for="haie">Choisir le type de haie</label>
+            <input type="hidden" value="{{ choix }}" name="choix" />
+            <select name="haie[]" class="form-control" multiple required>
+                {% for haie in mesHaies %}
+                    <option value="{{ haie.id }}">{{ haie.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+    </form>
+</div>
+{% endblock %}

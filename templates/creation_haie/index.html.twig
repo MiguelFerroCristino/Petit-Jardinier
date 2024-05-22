@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une haie{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1 class="text-2xl">Créer une haie</h1>
+
+    <form action="{{ path('app_creation_haie') }}" method="POST">
+        <div class="flex-col flex">
+        <div class="w-96 text-center text-2xl">
+            <label for="haie_nom">Code :</label>
+            <input type="text" id="haie_code" name="haie_code">
+            <label for="haie_nom">Nom :</label>
+            <input type="text" id="haie_nom" name="haie_nom">
+            <label for="haie_nom">Tarif :</label>
+            <input type="text" id="haie_tarif" name="haie_prix">
+            <label for="hauteur">Hauteur :</label>
+            <input type="text" id="hauteur" name="hauteur">
+            <label for="longueur">Longueur :</label>
+            <input type="text" id="longueur" name="longueur">
+            <label for="haie_nom">Categorie Haie :</label>
+            <select name="select-haie" id="haie-selected">
+                <option value="persistant">Persistant</option>
+                <option value="caduque">Caduque</option>
+            </select>
+        </div>
+    </div>
+        
+        <button type="submit" class="flex text-2xl">Créer</button>
+    </form>
+</div>
+{% endblock %}

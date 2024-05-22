@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ModifierHaieController!{% endblock %}
+
+{% block body %}
+
+
+<div class="h-screen w-screen flex flex-col gap-6 items-center justify-center bg-gray-100 p-4">
+    <div class="overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="min-w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Haie</th>
+                    <th scope="col" class="px-6 py-3">Longueur</th>
+                    <th scope="col" class="px-6 py-3">Hauteur</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tailler in tailler %}
+                <tr class="bg-white border-b ">
+                    <td class="px-6 py-4">{{ tailler.haie }}</td>
+                    <td class="px-6 py-4">{{ tailler.longueur }}</td>
+                    <td class="px-6 py-4">{{ tailler.hauteur }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+    <div class="bg-green-600 hover:bg-green-700 duration-300 flex p-2 rounded-lg items-center justify-center  text-white ">
+        <a href="{{path('app_devis_list')}}">Retour aux devis</a>
+    </div>
+</div>
+
+
+{% endblock %}
