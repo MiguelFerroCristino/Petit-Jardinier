@@ -3,34 +3,83 @@
 {% block title %}Hello ModifierHaieController!{% endblock %}
 
 {% block body %}
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f9f9f9;
+        padding: 20px;
+    }
+    .table-wrapper {
+        overflow-x: auto;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: #fff;
+        max-width: 100%;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    thead {
+        background-color: #f1f1f1;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        font-weight: bold;
+        color: #555;
+        text-transform: uppercase;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .button {
+        background-color: #38a169;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        display: inline-block;
+        margin-top: 20px;
+    }
+    .button:hover {
+        background-color: #2f855a;
+    }
+</style>
 
-
-<div class="h-screen w-screen flex flex-col gap-6 items-center justify-center bg-gray-100 p-4">
-    <div class="overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="min-w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+<div class="container">
+    <div class="table-wrapper">
+        <table>
+            <thead>
                 <tr>
-                    <th scope="col" class="px-6 py-3">Haie</th>
-                    <th scope="col" class="px-6 py-3">Longueur</th>
-                    <th scope="col" class="px-6 py-3">Hauteur</th>
+                    <th>Haie</th>
+                    <th>Longueur</th>
+                    <th>Hauteur</th>
                 </tr>
             </thead>
             <tbody>
                 {% for tailler in tailler %}
-                <tr class="bg-white border-b ">
-                    <td class="px-6 py-4">{{ tailler.haie }}</td>
-                    <td class="px-6 py-4">{{ tailler.longueur }}</td>
-                    <td class="px-6 py-4">{{ tailler.hauteur }}</td>
+                <tr>
+                    <td>{{ tailler.haie }}</td>
+                    <td>{{ tailler.longueur }}</td>
+                    <td>{{ tailler.hauteur }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        
     </div>
-    <div class="bg-green-600 hover:bg-green-700 duration-300 flex p-2 rounded-lg items-center justify-center  text-white ">
-        <a href="{{path('app_devis_list')}}">Retour aux devis</a>
-    </div>
+    <a href="{{ path('app_devis_list') }}" class="button">Retour aux devis</a>
 </div>
-
-
 {% endblock %}

@@ -3,31 +3,86 @@
 {% block title %}Créer une haie{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-    <h1 class="text-2xl">Créer une haie</h1>
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #f9f9f9;
+        padding: 20px;
+    }
+    .form-wrapper {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        width: 100%;
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+    label {
+        display: block;
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+    input, select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        margin-bottom: 20px;
+    }
+    button {
+        background-color: #007bff;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
 
-    <form action="{{ path('app_creation_haie') }}" method="POST">
-        <div class="flex-col flex">
-        <div class="w-96 text-center text-2xl">
-            <label for="haie_nom">Code :</label>
-            <input type="text" id="haie_code" name="haie_code">
-            <label for="haie_nom">Nom :</label>
-            <input type="text" id="haie_nom" name="haie_nom">
-            <label for="haie_nom">Tarif :</label>
-            <input type="text" id="haie_tarif" name="haie_prix">
-            <label for="hauteur">Hauteur :</label>
-            <input type="text" id="hauteur" name="hauteur">
-            <label for="longueur">Longueur :</label>
-            <input type="text" id="longueur" name="longueur">
-            <label for="haie_nom">Categorie Haie :</label>
-            <select name="select-haie" id="haie-selected">
-                <option value="persistant">Persistant</option>
-                <option value="caduque">Caduque</option>
-            </select>
-        </div>
+<div class="container">
+    <div class="form-wrapper">
+        <h1>Créer une haie</h1>
+        <form action="{{ path('app_creation_haie') }}" method="POST">
+            <div class="flex-col flex">
+                <label for="haie_code">Code :</label>
+                <input type="text" id="haie_code" name="haie_code">
+                <label for="haie_nom">Nom :</label>
+                <input type="text" id="haie_nom" name="haie_nom">
+                <label for="haie_tarif">Tarif :</label>
+                <input type="text" id="haie_tarif" name="haie_prix">
+                <label for="hauteur">Hauteur :</label>
+                <input type="text" id="hauteur" name="hauteur">
+                <label for="longueur">Longueur :</label>
+                <input type="text" id="longueur" name="longueur">
+                <label for="haie-selected">Catégorie Haie :</label>
+                <select name="select-haie" id="haie-selected">
+                    <option value="persistant">Persistant</option>
+                    <option value="caduque">Caduque</option>
+                </select>
+            </div>
+            <button type="submit">Créer</button>
+        </form>
     </div>
-        
-        <button type="submit" class="flex text-2xl">Créer</button>
-    </form>
 </div>
 {% endblock %}

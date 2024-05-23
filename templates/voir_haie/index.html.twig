@@ -3,33 +3,94 @@
 {% block title %}Liste des Haies{% endblock %}
 
 {% block body %}
-<div class="flex">
-    <h1 class="text-2xl">Liste des Haies</h1>
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #f9f9f9;
+        padding: 20px;
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    table {
+        width: 100%;
+        max-width: 800px;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+        padding: 12px 15px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f1f1f1;
+        color: #555;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .action-button {
+        background-color: #007bff;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .action-button:hover {
+        background-color: #0056b3;
+    }
+</style>
 
-    <table class="text-center">
+<div class="container">
+    <h1>Liste des Haies</h1>
+    <table>
         <thead>
             <tr>
-                <th class="px-4 py-2">Code</th>
-                <th class="px-4 py-2">Nom</th>
-                <th class="px-4 py-2">Prix</th>
-                <th class="px-4 py-2">Catégorie</th>
+                <th>Code</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Catégorie</th>
                 {% if app.user and app.user.hasAdminRole() %}
-                <th class="px-4 py-2">Actions</th>
+                <th>Actions</th>
                 {% endif %}
             </tr>
         </thead>
         <tbody>
             {% for haie in haies %}
                 <tr>
-                    <td class="border px-4 py-2">{{ haie.getCode() }}</td>
-                    <td class="border px-4 py-2">{{ haie.getNom() }}</td>
-                    <td class="border px-4 py-2">{{ haie.getPrix() }}</td>
-                    <td class="border px-4 py-2">{{ haie.getCategorie() }}</td>
+                    <td>{{ haie.getCode() }}</td>
+                    <td>{{ haie.getNom() }}</td>
+                    <td>{{ haie.getPrix() }}</td>
+                    <td>{{ haie.getCategorie() }}</td>
                     {% if app.user and app.user.hasAdminRole() %}
-                    <td class="border px-4 py-2">
-                        <a href="{{ path('modifier', { 'code': haie.getCode() }) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</a>
+                    <td>
+                        <a href="{{ path('modifier', { 'code': haie.getCode() }) }}" class="action-button">Modifier</a>
                         {% if haie.getCode() is not empty %}
-                        <a href="{{ path('app_supp_haie', { 'code': haie.getCode() }) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Supprimer</a>
+                        <a href="{{ path('app_supp_haie', { 'code': haie.getCode() }) }}" class="action-button">Supprimer</a>
                         {% endif %}
                     </td>
                     {% endif %}

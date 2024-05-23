@@ -1,34 +1,85 @@
-{# templates/devis/detail.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Détails du Devis{% endblock %}
 
 {% block body %}
 <style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #f9f9f9;
+        padding: 20px;
+    }
+    .details-wrapper {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        width: 100%;
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    p {
+        margin-bottom: 10px;
+    }
+    h2 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        font-weight: bold;
+        color: #555;
+        text-transform: uppercase;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
 </style>
 
-<div class="example-wrapper">
-    <h1 class="text-2xl font-bold mb-4">Détails du Devis #{{ devis.id }}</h1>
-    <p><strong>Date :</strong> {{ devis.date|date('Y-m-d') }}</p>
-    <p><strong>Prix Total :</strong> {{ devis.prixTotal }}</p>
-    <h2 class="text-xl font-bold mt-4">Détails des Haies </h2> 
-    <table class="table-auto w-full">
-        <thead>
-            <tr>
-                <th>Haie</th>
-                <th>Longueur</th>
-                <th>Hauteur</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for taille in tailler %}
+<div class="container">
+    <div class="details-wrapper">
+        <h1 class="text-2xl font-bold mb-4">Détails du Devis #{{ devis.id }}</h1>
+        <p><strong>Date :</strong> {{ devis.date|date('Y-m-d') }}</p>
+        <p><strong>Prix Total :</strong> {{ devis.prixTotal }}</p>
+        <h2 class="text-xl font-bold mt-4">Détails des Haies </h2> 
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ taille.haie.nom }}</td>
-                    <td>{{ taille.longueur }}</td>
-                    <td>{{ taille.hauteur }}</td>
+                    <th>Haie</th>
+                    <th>Longueur</th>
+                    <th>Hauteur</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for taille in tailler %}
+                    <tr>
+                        <td>{{ taille.haie.nom }}</td>
+                        <td>{{ taille.longueur }}</td>
+                        <td>{{ taille.hauteur }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

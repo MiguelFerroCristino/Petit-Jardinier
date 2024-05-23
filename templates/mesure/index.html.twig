@@ -1,23 +1,90 @@
-{# templates/devis/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Créer un Devis{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-    <h1>Créer un Devis</h1>
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #f0f0f0;
+        padding: 20px;
+    }
+    .example-wrapper {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+    }
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+    }
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease;
+        height: 150px;
+    }
+    select:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    button {
+        background-color: #007bff;
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        display: block;
+        margin-top: 20px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
 
-    <form method="get" action="{{ path('app_devis_create') }}">
-        <div class="form-group">
-            <label for="haie">Choisir le type de haie</label>
-            <input type="hidden" value="{{ choix }}" name="choix" />
-            <select name="haie[]" class="form-control" multiple required>
-                {% for haie in mesHaies %}
-                    <option value="{{ haie.id }}">{{ haie.nom }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Soumettre</button>
-    </form>
+<div class="container">
+    <div class="example-wrapper">
+        <h1>Créer un Devis</h1>
+        <form method="get" action="{{ path('app_devis_create') }}">
+            <div class="form-group">
+                <label for="haie">Choisir le type de haie</label>
+                <input type="hidden" value="{{ choix }}" name="choix" />
+                <select name="haie[]" class="form-control" multiple required>
+                    {% for haie in mesHaies %}
+                        <option value="{{ haie.id }}">{{ haie.nom }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Soumettre</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
